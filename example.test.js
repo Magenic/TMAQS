@@ -1,4 +1,10 @@
 describe("Training Page 2 Tests", () => {
+    var fs = require('fs');
+    var dir = './screenshots';
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+    }
+    
     beforeEach(async () => {
         await page.goto("http://magenicautomation.azurewebsites.net/Static/Training2/loginpage.html");
     })
@@ -34,7 +40,7 @@ describe("Training Page 2 Tests", () => {
         await page.waitForTimeout(1000) //workaround for page.waitForNavigation()
         await page.waitForSelector('#AsyncContent', { visible: true })
         await page.select('#Selector', valueToSelect)
-        
+
         const selectedValue = page.$eval('#Selector', el => el.value)
         await expect(await selectedValue).toEqual(valueToSelect)
     })

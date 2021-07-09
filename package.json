@@ -1,0 +1,20 @@
+{
+  "name": "tmaqs",
+  "version": "1.0.0",
+  "description": "TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://magenic-manila@dev.azure.com/magenic-manila/TMAQS/_git/TMAQS"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^27.0.6",
+    "jest-puppeteer": "^5.0.4",
+    "puppeteer": "^10.1.0"
+  }
+}

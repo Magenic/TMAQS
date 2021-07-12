@@ -18,6 +18,10 @@ steps:
       npm i
       npm build
   displayName: Install all Dependecies
+- task: CmdLine@2
+  inputs:
+    script: 'npm run test-azure'
+  displayName: Execute Jest Tests
 
 - task: PublishTestResults@2
   inputs:

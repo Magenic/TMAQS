@@ -1,5 +1,6 @@
 trigger:
 - dev
+- feature/*
 
 pool:
   vmImage: windows-latest

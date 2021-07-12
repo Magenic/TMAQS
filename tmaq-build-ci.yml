@@ -19,10 +19,11 @@ steps:
       npm build
   displayName: Install all Dependecies
 
-- task: PublishBuildArtifacts@1
+- task: PublishTestResults@2
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'tmaq_build'
-    publishLocation: 'Container'
-  displayName: Publish Build Artifact
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'junit.xml'
+    failTaskOnFailedTests: true
+    testRunTitle: 'Unit Tests'
+  displayName: Automation Test Results
 

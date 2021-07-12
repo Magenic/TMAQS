@@ -1,0 +1,26 @@
+trigger:
+- dev
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '6.x'
+    checkLatest: true
+  displayName: Install Latest Node Version
+
+- task: CmdLine@2
+  inputs:
+    script: |
+      npm i
+      npm build
+  displayName: Install all Dependecies
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'tmaq_build'
+    publishLocation: 'Container'
+

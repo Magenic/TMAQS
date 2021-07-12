@@ -17,7 +17,7 @@ steps:
     script: |
       npm i
       npm build
-  displayName: Install all Dependecies
+  displayName: Install all Dependencies
 - task: CmdLine@2
   inputs:
     script: 'npm run test-azure'

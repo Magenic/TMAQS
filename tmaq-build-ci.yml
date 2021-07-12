@@ -23,4 +23,5 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'tmaq_build'
     publishLocation: 'Container'
+  displayName: Publish Build Artifact
 

@@ -1,5 +1,6 @@
 trigger:
 - dev
+- feature/*
 
 pool:
   vmImage: windows-latest
@@ -7,7 +8,7 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '6.x'
+    versionSpec: '14.x'
     checkLatest: true
   displayName: Install Latest Node Version
 
@@ -17,10 +18,16 @@ steps:
       npm i
       npm build
   displayName: Install all Dependecies
-
-- task: PublishBuildArtifacts@1
+- task: CmdLine@2
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'tmaq_build'
-    publishLocation: 'Container'
+    script: 'npm run test-azure'
+  displayName: Execute Jest Tests
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'junit.xml'
+    failTaskOnFailedTests: true
+    testRunTitle: 'Unit Tests'
+  displayName: Automation Test Results
 

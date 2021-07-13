@@ -22,6 +22,8 @@ steps:
   inputs:
     script: 'npm run test-azure'
   displayName: Execute Jest Tests
+  continueOnError: true
+
 
 - task: PublishTestResults@2
   inputs:

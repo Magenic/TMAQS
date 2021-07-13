@@ -17,7 +17,7 @@ describe("Training Page 2 Tests", () => {
         await page.type('#Password', '123')
         await page.click('#Login')
         const welcomeMessage = await page.$eval('#WelcomeMessage', el => el.innerText)
-        await expect(welcomeMessage).toEqual('Welcome Homes')
+        await expect(welcomeMessage).toEqual('Welcome Home')
     })
 
     it("Invalid Login", async () => {

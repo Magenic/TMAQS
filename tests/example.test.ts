@@ -1,3 +1,5 @@
+import { HtmlOptions } from "istanbul-reports";
+
 describe("Training Page 2 Tests", () => {
     var fs = require('fs');
     var dir = './screenshots';
@@ -16,7 +18,10 @@ describe("Training Page 2 Tests", () => {
         await page.type('#UserName', 'Ted')
         await page.type('#Password', '123')
         await page.click('#Login')
-        const welcomeMessage = await page.$eval('#WelcomeMessage', el => el.innerText)
+
+        await page.waitForTimeout(1000)
+
+        const welcomeMessage = await page.$eval('#WelcomeMessage', el => el.innerHTML)
         await expect(welcomeMessage).toEqual('Welcome Home')
     })
 
@@ -24,7 +29,7 @@ describe("Training Page 2 Tests", () => {
         await page.type('#UserName', 'Teddy')
         await page.type('#Password', '123')
         await page.click('#Login')
-        const loginErrorMessage = await page.$eval('#LoginError', el => el.innerText)
+        const loginErrorMessage = await page.$eval('#LoginError', el => el.innerHTML)
         await expect(loginErrorMessage).toContain('Invalid')
     })
 
@@ -40,9 +45,9 @@ describe("Training Page 2 Tests", () => {
         await page.waitForTimeout(1000) //workaround for page.waitForNavigation()
         await page.waitForSelector('#AsyncContent', { visible: true })
         await page.select('#Selector', valueToSelect)
-
-        const selectedValue = page.$eval('#Selector', el => el.value)
-        await expect(await selectedValue).toEqual(valueToSelect)
+        
+        // const selectedValue = await page.$eval('#Selector', el => (el as HTMLInputElement).value) ;
+        // await expect(selectedValue.toString()).toEqual(valueToSelect)
     })
 
 })

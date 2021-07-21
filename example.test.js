@@ -45,4 +45,29 @@ describe("Training Page 2 Tests", () => {
         await expect(await selectedValue).toEqual(valueToSelect)
     })
 
+    it("Select Item From Dropdown", async () => {
+        await page.goto("http://magenicautomation.azurewebsites.net/Automation");
+
+        const valueToSelect = 'six'
+        await page.select('#namesDropdown', valueToSelect);
+
+        const selectedByValue = page.$eval('#namesDropdown > option[value="' + valueToSelect + '"]', el => el.value);
+        const selectedByText = page.$eval('#namesDropdown > option[value="' + valueToSelect + '"]', el => el.innerText);
+
+        await expect(await selectedByValue).toEqual(valueToSelect);
+        await expect(await selectedByText).toEqual('Emily');
+    })
+
+    it("Select One Item From List Element", async () => {
+        await page.goto("http://magenicautomation.azurewebsites.net/Automation");
+
+        const valueToSelect = 'three'
+        await page.select('#computerParts', valueToSelect);
+
+        const selectedByValue = page.$eval('#computerParts > option[value="' + valueToSelect + '"]', el => el.value);
+        const selectedByText = page.$eval('#computerParts > option[value="' + valueToSelect + '"]', el => el.innerText);
+
+        await expect(await selectedByValue).toEqual(valueToSelect);
+        await expect(await selectedByText).toEqual('Hard Drive');
+    })
 })

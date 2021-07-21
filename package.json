@@ -4,7 +4,8 @@
   "description": "TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test-azure": "jest --ci --reporters=jest-junit --reporters=default"
   },
   "repository": {
     "type": "git",
@@ -28,7 +29,16 @@
     "babel-core": "^6.26.3",
     "babel-jest": "^27.0.6",
     "jest": "^27.0.6",
+    "jest-puppeteer": "^5.0.4",
+    "puppeteer": "^10.1.0",
     "ts-jest": "^27.0.3",
     "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "jest-junit": "^12.2.0",
+    "jest-junit-reporter": "^1.1.0"
+  },
+  "jest": {
+    "testResultsProcessor": "./node_modules/jest-junit-reporter"
   }
 }

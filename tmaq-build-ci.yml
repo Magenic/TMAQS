@@ -1,0 +1,34 @@
+trigger:
+- dev
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '14.x'
+    checkLatest: true
+  displayName: Install Latest Node Version
+
+- task: CmdLine@2
+  inputs:
+    script: |
+      npm i
+      npm build
+  displayName: Install all Dependencies
+- task: CmdLine@2
+  inputs:
+    script: 'npm run test-azure'
+  displayName: Execute Jest Tests
+  continueOnError: true
+
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: 'junit.xml'
+    failTaskOnFailedTests: true
+    testRunTitle: 'Unit Tests'
+  displayName: Automation Test Results
+

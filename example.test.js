@@ -14,7 +14,7 @@ describe("Training Page 2 Tests", () => {
         await page.screenshot({ path: `./screenshots/${await expect.getState().currentTestName}.png` })
     })
 
-    it.only("Valid Login", async () => {
+    it.skip("Valid Login", async () => {
         await page.type('#UserName', 'Ted')
         await page.type('#Password', '123')
         await page.click('#Login')

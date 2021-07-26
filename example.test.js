@@ -1,3 +1,5 @@
+const { SSL_OP_EPHEMERAL_RSA } = require('constants');
+
 describe("Training Page 2 Tests", () => {
     var fs = require('fs');
     var dir = './screenshots';
@@ -17,6 +19,7 @@ describe("Training Page 2 Tests", () => {
         await page.type('#Password', '123')
         await page.click('#Login')
         const welcomeMessage = await page.$eval('#WelcomeMessage', el => el.innerText)
+        Sleep.sleep(3000);
         await expect(welcomeMessage).toEqual('Welcome Home')
     })
 

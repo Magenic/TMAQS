@@ -45,18 +45,43 @@ describe("Training Page 2 Tests", () => {
         await expect(await selectedValue).toEqual(valueToSelect)
     })
 
-    it.only("Click A Button for Element", async () => {
+    it("Select Item From Dropdown", async () => {
+        await page.goto("http://magenicautomation.azurewebsites.net/Automation");
+
+        const valueToSelect = 'six'
+        await page.select('#namesDropdown', valueToSelect);
+
+        const selectedByValue = page.$eval('#namesDropdown > option[value="' + valueToSelect + '"]', el => el.value);
+        const selectedByText = page.$eval('#namesDropdown > option[value="' + valueToSelect + '"]', el => el.innerText);
+
+        await expect(await selectedByValue).toEqual(valueToSelect);
+        await expect(await selectedByText).toEqual('Emily');
+    })
+
+    it("Select One Item From List Element", async () => {
+        await page.goto("http://magenicautomation.azurewebsites.net/Automation");
+
+        const valueToSelect = 'three'
+        await page.select('#computerParts', valueToSelect);
+
+        const selectedByValue = page.$eval('#computerParts > option[value="' + valueToSelect + '"]', el => el.value);
+        const selectedByText = page.$eval('#computerParts > option[value="' + valueToSelect + '"]', el => el.innerText);
+
+        await expect(await selectedByValue).toEqual(valueToSelect);
+        await expect(await selectedByText).toEqual('Hard Drive');
+    })
+
+    it("Click A Button for Element", async () => {
         await page.goto("http://magenicautomation.azurewebsites.net/Automation");
 
         await page.click('#showDialog1');
         await expect(page.waitForSelector('#CloseButtonShowDialog', {visible: true})).toBeTruthy();
     })
 
-    it.only("Click A Button for Link Element", async () => {
+    it("Click A Button for Link Element", async () => {
         await page.goto("http://magenicautomation.azurewebsites.net/Automation");
 
         await page.click('a[href="/Automation/ErrorPage"]');
         await expect(page.url()).toEqual("http://magenicautomation.azurewebsites.net/Automation/ErrorPage");
     })
-
 })

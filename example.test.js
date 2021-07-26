@@ -12,7 +12,7 @@ describe("Training Page 2 Tests", () => {
         await page.screenshot({ path: `./screenshots/${await expect.getState().currentTestName}.png` })
     })
 
-    it("Valid Login", async () => {
+    it.only("Valid Login", async () => {
         await page.type('#UserName', 'Ted')
         await page.type('#Password', '123')
         await page.click('#Login')

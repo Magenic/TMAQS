@@ -45,4 +45,18 @@ describe("Training Page 2 Tests", () => {
         await expect(await selectedValue).toEqual(valueToSelect)
     })
 
+    it.only("Click A Button for Element", async () => {
+        await page.goto("http://magenicautomation.azurewebsites.net/Automation");
+
+        await page.click('#showDialog1');
+        await expect(page.waitForSelector('#CloseButtonShowDialog', {visible: true})).toBeTruthy();
+    })
+
+    it.only("Click A Button for Link Element", async () => {
+        await page.goto("http://magenicautomation.azurewebsites.net/Automation");
+
+        await page.click('a[href="/Automation/ErrorPage"]');
+        await expect(page.url()).toEqual("http://magenicautomation.azurewebsites.net/Automation/ErrorPage");
+    })
+
 })

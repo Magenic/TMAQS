@@ -1,5 +1,8 @@
 interface IDriver{
-   // getDriver : () => IDriver;
-   createBrowserPage : (url: string) => void;
-   close : () => void;
+   getDriver : () => Promise<IDriver>;
+   navigateToUrl : (url: string) => Promise<IDriver>;
+   close : () => Promise<void>;
+   scrollIntoView : (selector: string) => Promise<IDriver>;
+   url : () => Promise<string>;
+   waitForTimeout : (ms: number) => Promise<void>;
 }

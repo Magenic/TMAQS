@@ -29,7 +29,7 @@ export default class Browser {
     await this.driver.scrollIntoView(selector);
   }
 
-  waitForTimeout = async (ms: number) => {
-    await this.driver.waitForTimeout(ms);
+  sleep = async (ms: number) => {
+    await this.driver.sleep(ms);
   }
 }

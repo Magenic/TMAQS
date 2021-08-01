@@ -36,7 +36,7 @@ export default class PuppeteerDriver implements IDriver {
         return await this.page!.url();
     }
 
-    waitForTimeout = async (ms: number) => {
+    sleep = async (ms: number) => {
         await this.page!.waitForTimeout(ms);
     }
 }

@@ -4,5 +4,5 @@ interface IDriver{
    close : () => Promise<void>;
    scrollIntoView : (selector: string) => Promise<IDriver>;
    url : () => Promise<string>;
-   waitForTimeout : (ms: number) => Promise<void>;
+   sleep : (ms: number) => Promise<void>;
 }

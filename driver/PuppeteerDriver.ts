@@ -3,7 +3,7 @@ import { Page, Browser } from "puppeteer";
 export default class PuppeteerDriver implements IDriver {
     private isHeadless = false; // should be pulled out from config file
     private browser?: Browser = undefined;
-    private page?: Page | undefined = undefined;
+    private page?: Page = undefined;
 
 
     getDriver = async (): Promise<IDriver> =>  {

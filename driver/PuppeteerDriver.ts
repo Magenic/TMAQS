@@ -9,7 +9,6 @@ export default class PuppeteerDriver implements IDriver {
     getDriver = async (): Promise<IDriver> =>  {
         if (this.browser === undefined) {
             this.browser = await await require('puppeteer').launch({
-                product: "chrome",
                 headless: this.isHeadless,
                 defaultViewport: null,
                 args: ["--start-maximized"],

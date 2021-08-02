@@ -15,6 +15,7 @@ steps:
   inputs:
     script: |
       npm i
+      npm install -g jest
       npm build
   displayName: Install all Dependencies
 - task: CmdLine@2

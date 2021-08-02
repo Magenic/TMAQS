@@ -27,7 +27,7 @@ export default class PuppeteerDriver implements IDriver {
     };
 
     close = async (): Promise<void> => {
-        await this.page!.close();
+        return await this.page!.close();
     }
 
     scrollIntoView = async (selector: string): Promise<IDriver> => {
@@ -41,6 +41,6 @@ export default class PuppeteerDriver implements IDriver {
     }
 
     sleep = async (ms: number): Promise<void> => {
-        await this.page!.waitForTimeout(ms);
+        return await this.page!.waitForTimeout(ms);
     }
 }

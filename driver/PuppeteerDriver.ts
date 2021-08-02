@@ -1,4 +1,4 @@
-import { Page, Browser } from "puppeteer";
+import { Browser, Page } from "puppeteer";
 
 export default class PuppeteerDriver implements IDriver {
     private isHeadless = false; // should be pulled out from config file

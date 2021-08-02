@@ -13,23 +13,23 @@ export default class Browser {
     this.driver = new PuppeteerDriver();
   }
 
-  getDriver = async () => {
+  getDriver = async (): Promise<IDriver> => {
     return await this.driver.getDriver();
   }
 
-  navigateToUrl = async (url: string) => {
-    await this.driver.navigateToUrl(url);
+  navigateToUrl = async (url: string): Promise<IDriver> => {
+    return await this.driver.navigateToUrl(url);
   };
 
-  close = async () => {
+  close = async (): Promise<void> => {
     await this.driver.close();
   }
 
-  scrollIntoView = async (selector: string) => {
-    await this.driver.scrollIntoView(selector);
+  scrollIntoView = async (selector: string): Promise<IDriver> => {
+    return await this.driver.scrollIntoView(selector);
   }
 
-  sleep = async (ms: number) => {
+  sleep = async (ms: number): Promise<void> => {
     await this.driver.sleep(ms);
   }
 }

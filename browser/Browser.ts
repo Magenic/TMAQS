@@ -22,7 +22,7 @@ export default class Browser {
   };
 
   close = async (): Promise<void> => {
-    await this.driver.close();
+    return await this.driver.close();
   }
 
   scrollIntoView = async (selector: string): Promise<IDriver> => {
@@ -30,6 +30,6 @@ export default class Browser {
   }
 
   sleep = async (ms: number): Promise<void> => {
-    await this.driver.sleep(ms);
+    return await this.driver.sleep(ms);
   }
 }

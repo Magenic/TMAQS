@@ -16,6 +16,7 @@ describe("Training Page 2 Tests", () => {
         await page.type('#UserName', 'Ted')
         await page.type('#Password', '123')
         await page.click('#Login')
+        await page.waitForSelector('#WelcomeMessage')
         const welcomeMessage = await page.$eval('#WelcomeMessage', el => el.innerHTML)
         await expect(welcomeMessage).toEqual('Welcome Home')
     })

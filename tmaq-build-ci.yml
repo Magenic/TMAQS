@@ -25,7 +25,7 @@ steps:
 
 - task: CmdLine@2
   inputs:
-    script: 'npm run test-azure'
+    script: 'jest tests/%TEST_NAME% --ci --reporters=jest-junit --reporters=default'
   displayName: Execute Jest Tests
   continueOnError: true
 

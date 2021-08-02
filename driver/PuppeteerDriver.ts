@@ -13,6 +13,7 @@ export default class PuppeteerDriver implements IDriver {
                 headless: this.isHeadless,
                 args: ["--start-maximized"],
                 defaultViewport: null,
+                executablePath: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
             });
             if (this.page === undefined) {
                 this.page = (await this.browser!.pages())[0];

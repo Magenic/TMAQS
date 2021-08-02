@@ -11,8 +11,8 @@ export default class PuppeteerDriver implements IDriver {
             this.browser = await await require('puppeteer').launch({
                 product: "chrome",
                 headless: this.isHeadless,
-                args: ["--start-maximized"],
                 defaultViewport: null,
+                args: ["--start-maximized"],
                 executablePath: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
             });
             if (this.page === undefined) {

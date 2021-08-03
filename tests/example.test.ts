@@ -1,12 +1,10 @@
-import { HtmlOptions } from "istanbul-reports";
-
 describe("Training Page 2 Tests", () => {
-    var fs = require('fs');
-    var dir = './screenshots';
+    const fs = require('fs');
+    const dir = './screenshots';
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
     }
-    
+
     beforeEach(async () => {
         await page.goto("http://magenicautomation.azurewebsites.net/Static/Training2/loginpage.html");
     })
@@ -14,16 +12,14 @@ describe("Training Page 2 Tests", () => {
         await page.screenshot({ path: `./screenshots/${await expect.getState().currentTestName}.png` })
     })
 
-    // it("Valid Login", async () => {
-    //     await page.type('#UserName', 'Ted')
-    //     await page.type('#Password', '123')
-    //     await page.click('#Login')
-
-    //     await page.waitForTimeout(1000)
-
-    //     const welcomeMessage = await page.$eval('#WelcomeMessage', el => el.innerHTML)
-    //     await expect(welcomeMessage).toEqual('Welcome Home')
-    // })
+    it("Valid Login", async () => {
+        await page.type('#UserName', 'Ted')
+        await page.type('#Password', '123')
+        await page.click('#Login')
+        await page.waitForSelector('#WelcomeMessage')
+        const welcomeMessage = await page.$eval('#WelcomeMessage', el => el.innerHTML)
+        await expect(welcomeMessage).toEqual('Welcome Home')
+    })
 
     it("Invalid Login", async () => {
         await page.type('#UserName', 'Teddy')
@@ -45,9 +41,9 @@ describe("Training Page 2 Tests", () => {
         await page.waitForTimeout(1000) //workaround for page.waitForNavigation()
         await page.waitForSelector('#AsyncContent', { visible: true })
         await page.select('#Selector', valueToSelect)
-        
-        // const selectedValue = await page.$eval('#Selector', el => (el as HTMLInputElement).value) ;
-        // await expect(selectedValue.toString()).toEqual(valueToSelect)
+
+        const selectedValue = await page.$eval('#Selector', (el: HTMLSelectElement) => el.value);
+        await expect(selectedValue.toString()).toEqual(valueToSelect)
     })
 
     it("Select Item From Dropdown", async () => {
@@ -56,11 +52,11 @@ describe("Training Page 2 Tests", () => {
         const valueToSelect = 'six'
         await page.select('#namesDropdown', valueToSelect);
 
-        // const selectedByValue = await page.$eval('#namesDropdown > option[value="' + valueToSelect + '"]', el => el.value);
+        const selectedByValue = await page.$eval('#namesDropdown > option[value="' + valueToSelect + '"]', (el: HTMLSelectElement) => el.value);
         const selectedByText = await page.$eval('#namesDropdown > option[value="' + valueToSelect + '"]', el => el.textContent);
 
-        //  await expect(selectedByValue).toEqual(valueToSelect);
-         await expect(await selectedByText).toEqual('Emily');
+        await expect(selectedByValue).toEqual(valueToSelect);
+        await expect(await selectedByText).toEqual('Emily');
     })
 
     it("Select One Item From List Element", async () => {
@@ -69,10 +65,10 @@ describe("Training Page 2 Tests", () => {
         const valueToSelect = 'three'
         await page.select('#computerParts', valueToSelect);
 
-        // const selectedByValue = page.$eval('#computerParts > option[value="' + valueToSelect + '"]', el => el);
+        const selectedByValue = page.$eval('#computerParts > option[value="' + valueToSelect + '"]', (el: HTMLSelectElement) => el.value);
         const selectedByText = page.$eval('#computerParts > option[value="' + valueToSelect + '"]', el => el.textContent);
 
-        // await expect(await selectedByValue).toEqual(valueToSelect);
+        await expect(await selectedByValue).toEqual(valueToSelect);
         await expect(await selectedByText).toEqual('Hard Drive');
     })
 
@@ -80,7 +76,7 @@ describe("Training Page 2 Tests", () => {
         await page.goto("http://magenicautomation.azurewebsites.net/Automation");
 
         await page.click('#showDialog1');
-        await expect(page.waitForSelector('#CloseButtonShowDialog', {visible: true})).toBeTruthy();
+        await expect(page.waitForSelector('#CloseButtonShowDialog', { visible: true })).toBeTruthy();
     })
 
     it("Click A Button for Link Element", async () => {
@@ -88,5 +84,25 @@ describe("Training Page 2 Tests", () => {
 
         await page.click('a[href="/Automation/ErrorPage"]');
         await expect(page.url()).toEqual("http://magenicautomation.azurewebsites.net/Automation/ErrorPage");
+    })
+
+    it("Type text in a Textbox Element", async () => {
+        await page.goto("http://magenicautomation.azurewebsites.net/Automation");
+
+        const firstName = 'John'
+        await page.type('input[name="firstname"]', firstName , {delay: 100})
+        const typedValue = await page.$eval('input[name="firstname"]', el => (el as HTMLInputElement).value) ;
+        await expect(typedValue).toEqual(firstName)
+    })
+
+    it("Right Click An Element", async () => {
+        await page.goto("http://magenicautomation.azurewebsites.net/Automation");
+
+        const contextMenuBox = await page.$('#rightclickspace');
+
+        await contextMenuBox?.click({button: 'right'});
+
+        const styleValue = await page.$eval('#rightclickmenu', el => el.getAttribute('style'));
+        expect(styleValue).toContain('display: block')
     })
 })

@@ -84,4 +84,14 @@ describe("Training Page 2 Tests", () => {
         await page.click('a[href="/Automation/ErrorPage"]');
         await expect(page.url()).toEqual("http://magenicautomation.azurewebsites.net/Automation/ErrorPage");
     })
+
+    it("Type text in a Textbox Element", async () => {
+        await page.goto("http://magenicautomation.azurewebsites.net/Automation");
+
+        const firstName = 'John'
+        await page.type('input[name="firstname"]', firstName , {delay: 100})
+        const typedValue = await page.$eval('input[name="firstname"]', el => (el as HTMLInputElement).value) ;
+        await expect(typedValue).toEqual(firstName)
+    })
+
 })

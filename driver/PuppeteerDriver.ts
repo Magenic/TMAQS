@@ -37,7 +37,9 @@ export default class PuppeteerDriver implements IDriver {
             await this.page!.$eval(selector, (elem) => elem.scrollIntoView()) : null;
         }
         else { 
-            await this.storedElement!.hover();
+            if (this.storedElement) {
+                await this.storedElement!.hover();
+            }
         }
         
         return this;

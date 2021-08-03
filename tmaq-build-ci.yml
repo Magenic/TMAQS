@@ -15,12 +15,17 @@ steps:
   inputs:
     script: |
       npm i
-      npm install -g jest
-      npm build
   displayName: Install all Dependencies
+
 - task: CmdLine@2
   inputs:
-    script: 'npm run test-azure'
+    script: |
+      npm install -g jest
+  displayName: Install Global Jest
+
+- task: CmdLine@2
+  inputs:
+    script: 'jest tests/%TEST_NAME% --ci --reporters=jest-junit --reporters=default'
   displayName: Execute Jest Tests
   continueOnError: true
 

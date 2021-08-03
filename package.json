@@ -22,7 +22,8 @@
     "@types/puppeteer": "^5.4.4",
     "jest-puppeteer": "^5.0.4",
     "puppeteer": "^10.1.0",
-    "puppeteer-core": "^10.1.0"
+    "puppeteer-core": "^10.1.0",
+    "strip-bom": "^5.0.0"
   },
   "devDependencies": {
     "jest": "^27.0.6",
@@ -31,5 +32,8 @@
   },
   "jest": {
     "testResultsProcessor": "./node_modules/jest-junit-reporter"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.1.2"
   }
 }

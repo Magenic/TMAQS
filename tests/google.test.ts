@@ -6,7 +6,7 @@ describe('Google', () => {
   let driver: IDriver;
 
   beforeEach(async () => {
-    const browser = await new Browser();
+    let browser = await new Browser();
     driver = await browser.getDriver();
   });
 

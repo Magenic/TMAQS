@@ -16,6 +16,7 @@ describe("Training Page 2 Tests", () => {
         await page.type('#UserName', 'Ted')
         await page.type('#Password', '123')
         await page.click('#Login')
+        await page.waitForSelector('#WelcomeMessage')
         const welcomeMessage = await page.$eval('#WelcomeMessage', el => el.innerHTML)
         await expect(welcomeMessage).toEqual('Welcome Home')
     })
@@ -94,4 +95,14 @@ describe("Training Page 2 Tests", () => {
         await expect(typedValue).toEqual(firstName)
     })
 
+    it("Right Click An Element", async () => {
+        await page.goto("http://magenicautomation.azurewebsites.net/Automation");
+
+        const contextMenuBox = await page.$('#rightclickspace');
+
+        await contextMenuBox?.click({button: 'right'});
+
+        const styleValue = await page.$eval('#rightclickmenu', el => el.getAttribute('style'));
+        expect(styleValue).toContain('display: block')
+    })
 })

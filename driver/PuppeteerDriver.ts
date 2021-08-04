@@ -4,7 +4,7 @@ export default class PuppeteerDriver implements IDriver {
     private isHeadless = false; // should be pulled out from config file
     private browser?: Browser = undefined;
     private page?: Page = undefined;
-    private storedElement?: ElementHandle = undefined;
+    private storedElements?: Array<ElementHandle> = undefined;
 
 
     getDriver = async (): Promise<IDriver> =>  {
@@ -37,8 +37,8 @@ export default class PuppeteerDriver implements IDriver {
             await this.page!.$eval(selector, (elem) => elem.scrollIntoView()) : null;
         }
         else { 
-            if (this.storedElement) {
-                await this.storedElement!.hover();
+            if (this.storedElements && this.storedElements.length > 0) {
+                this.storedElements.forEach(async (element) => await element.hover());
             }
         }
         
@@ -59,6 +59,11 @@ export default class PuppeteerDriver implements IDriver {
             if (await this.page!.waitForXPath(selector, {visible: true})) {
                 elements = await this.page!.$x(selector);
                 if (elements && elements.length > 0) {
+                    // Ensures that this.storedElements has no items in it yet
+                    // Make sure to do this before every push
+                    // Since this is a shared property within this object
+                    this.storedElements = new Array<ElementHandle>();
+
                     // I've stored this as this object's property so that
                     // When we do something like this:
                     // await searchElement('//div'). -> we still return IDriver for chaining
@@ -68,7 +73,7 @@ export default class PuppeteerDriver implements IDriver {
                     // Please observe the modified scrollIntoView(selector?: string) method
                     // For more examples please see this test in google.test.ts
                     // 'should search for a specific element using Xpath as selector'
-                    this.storedElement = elements[0];
+                    this.storedElements.push(elements[0]);
                 }
             }
         }

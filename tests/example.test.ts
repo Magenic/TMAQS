@@ -42,7 +42,7 @@ describe("Training Page 2 Tests", () => {
         await page.waitForSelector('#AsyncContent', { visible: true })
         await page.select('#Selector', valueToSelect)
 
-        const selectedValue = await page.$eval('#Selector', (el: HTMLSelectElement) => el.value);
+        const selectedValue = await page.$eval('#Selector', (el) => (el as HTMLSelectElement).value);
         await expect(selectedValue.toString()).toEqual(valueToSelect)
     })
 
@@ -52,7 +52,7 @@ describe("Training Page 2 Tests", () => {
         const valueToSelect = 'six'
         await page.select('#namesDropdown', valueToSelect);
 
-        const selectedByValue = await page.$eval('#namesDropdown > option[value="' + valueToSelect + '"]', (el: HTMLSelectElement) => el.value);
+        const selectedByValue = await page.$eval('#namesDropdown > option[value="' + valueToSelect + '"]', (el) => (el as HTMLSelectElement).value);
         const selectedByText = await page.$eval('#namesDropdown > option[value="' + valueToSelect + '"]', el => el.textContent);
 
         await expect(selectedByValue).toEqual(valueToSelect);
@@ -65,7 +65,7 @@ describe("Training Page 2 Tests", () => {
         const valueToSelect = 'three'
         await page.select('#computerParts', valueToSelect);
 
-        const selectedByValue = page.$eval('#computerParts > option[value="' + valueToSelect + '"]', (el: HTMLSelectElement) => el.value);
+        const selectedByValue = page.$eval('#computerParts > option[value="' + valueToSelect + '"]', (el) => (el as HTMLSelectElement).value);
         const selectedByText = page.$eval('#computerParts > option[value="' + valueToSelect + '"]', el => el.textContent);
 
         await expect(await selectedByValue).toEqual(valueToSelect);

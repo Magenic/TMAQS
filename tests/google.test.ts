@@ -30,7 +30,9 @@ describe('Google', () => {
 
   it('should search for an element via xpath then scrolls into view using that element', async () => {
     await driver.navigateToUrl(magenicAutomationSite);
-    const elem = await (await driver.searchElement("//*[@id='rightclickspace']")).scrollIntoView();
-    expect(elem).toBeTruthy();
+    await (await (await (await driver.searchElement("//*[@id='rightclickspace']"))
+                  .scrollIntoView())
+                  .searchElement("//input[@name='firstname']"))
+                  .type("John");
   })
 })

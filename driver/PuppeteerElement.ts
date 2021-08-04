@@ -21,9 +21,13 @@ export default class PuppeteerElement implements IElement {
     }
 
     searchElement = async (selector: string): Promise<IElement> => {
+        let elements: Array<ElementHandle>;
         let element: ElementHandle;
         if (selector && selector[0] === '/') {
-            element = (await this.elem.$x(selector))[0]!;
+            elements = await this.elem.$x(selector);
+            if (elements && elements.length > 0) {
+                element = elements[0]!;
+            }
         }
         else {
             element = (await this.elem.$(selector))!;

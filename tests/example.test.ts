@@ -72,6 +72,29 @@ describe("Training Page 2 Tests", () => {
         await expect(await selectedByText).toEqual('Hard Drive');
     })
 
+    it("Select Multiple Item From List Element", async () => {
+        await page.goto("http://magenicautomation.azurewebsites.net/Automation");
+
+        const valueToSelect = 'one';
+        const valueToSelect1 = 'two';
+        const valueToSelect2 = 'three';
+        await page.select('#computerParts', valueToSelect, valueToSelect1, valueToSelect2);
+
+        const selectedByValue = page.$eval('#computerParts > option[value="' + valueToSelect + '"]', (el: HTMLSelectElement) => el.value);
+        const selectedByText = page.$eval('#computerParts > option[value="' + valueToSelect + '"]', el => el.textContent);
+        const selectedByValue1 = page.$eval('#computerParts > option[value="' + valueToSelect1 + '"]', (el: HTMLSelectElement) => el.value);
+        const selectedByText1 = page.$eval('#computerParts > option[value="' + valueToSelect1 + '"]', el => el.textContent);
+        const selectedByValue2 = page.$eval('#computerParts > option[value="' + valueToSelect2 + '"]', (el: HTMLSelectElement) => el.value);
+        const selectedByText2 = page.$eval('#computerParts > option[value="' + valueToSelect2 + '"]', el => el.textContent);
+
+        await expect(await selectedByValue).toEqual(valueToSelect);
+        await expect(await selectedByText).toEqual('Motherboard');
+        await expect(await selectedByValue1).toEqual(valueToSelect1);
+        await expect(await selectedByText1).toEqual('Power Supply');
+        await expect(await selectedByValue2).toEqual(valueToSelect2);
+        await expect(await selectedByText2).toEqual('Hard Drive');
+    })
+
     it("Click A Button for Element", async () => {
         await page.goto("http://magenicautomation.azurewebsites.net/Automation");
 

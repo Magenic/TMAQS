@@ -35,7 +35,6 @@ export default class PuppeteerDriver implements IDriver {
     scrollIntoView = async (selector: string): Promise<IDriver> => {
         await this.page!.waitForSelector(selector, {visible: true}) ? 
         await this.page!.$eval(selector, (elem) => elem.scrollIntoView()) : null;
-
         return this;
     }
 

@@ -113,9 +113,11 @@ describe("Training Page 2 Tests", () => {
 
         //Add validation before selected
         let isFemaleBtnSelected = await (await femaleRadioBtn?.getProperty("checked"))?.jsonValue();
-        expect(isFemaleBtnSelected).toEqual(false);
-
-        await femaleRadioBtn?.click();
+        
+        if(!isFemaleBtnSelected)
+        {
+            await femaleRadioBtn?.click();
+        }
 
         isFemaleBtnSelected = await (await femaleRadioBtn?.getProperty("checked"))?.jsonValue();
         expect(isFemaleBtnSelected).toEqual(true);

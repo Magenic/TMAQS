@@ -128,4 +128,21 @@ describe("Training Page 2 Tests", () => {
         const styleValue = await page.$eval('#rightclickmenu', el => el.getAttribute('style'));
         expect(styleValue).toContain('display: block')
     })
+
+    it("Radio button Click An Element", async () => {
+        await page.goto("http://magenicautomation.azurewebsites.net/Automation");
+
+        const femaleRadioBtn = await page.$('#FemaleRadio');
+
+        //Add validation before selected
+        let isFemaleBtnSelected = await (await femaleRadioBtn?.getProperty("checked"))?.jsonValue();
+        
+        if(!isFemaleBtnSelected)
+        {
+            await femaleRadioBtn?.click();
+        }
+
+        isFemaleBtnSelected = await (await femaleRadioBtn?.getProperty("checked"))?.jsonValue();
+        expect(isFemaleBtnSelected).toEqual(true);
+    })
 })

@@ -1,6 +1,8 @@
 import Browser from "../browser/Browser";
 
 describe('Google', () => {
+  const googleUrl = 'https://google.com';
+  const magenicAutomationSite = "http://magenicautomation.azurewebsites.net/Automation";
   let driver: IDriver;
 
   beforeEach(async () => {
@@ -13,16 +15,24 @@ describe('Google', () => {
   });
 
   it('should display "google" text on page', async () => {
-    await driver.navigateToUrl('https://google.com');
+    await driver.navigateToUrl(googleUrl);
     expect(await driver.url()).toMatch('google');
   })
 
   it('should display "magenic automation site" on page using puppeteer wrapper', async () => {
-    await driver.navigateToUrl("http://magenicautomation.azurewebsites.net/Automation");
+    await driver.navigateToUrl(magenicAutomationSite);
   })
 
   it('should scroll into view of an element', async () => {
-    await driver.navigateToUrl("http://magenicautomation.azurewebsites.net/Automation");
+    await driver.navigateToUrl(magenicAutomationSite);
     await driver.scrollIntoView("#rightclickspace");
+  })
+
+  it('should search for an element via xpath then scrolls into view using that element', async () => {
+    await driver.navigateToUrl(magenicAutomationSite);
+    await (await (await (await driver.searchElement("//*[@id='rightclickspace']"))
+                  .scrollIntoView())
+                  .searchElement("//input[@name='firstname']"))
+                  .type("John");
   })
 })

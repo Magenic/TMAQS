@@ -25,11 +25,15 @@ export default class Browser {
     return await this.driver.close();
   }
 
-  scrollIntoView = async (selector: string): Promise<IDriver> => {
+  scrollIntoView = async (selector?: string): Promise<IDriver> => {
     return await this.driver.scrollIntoView(selector);
   }
 
   sleep = async (ms: number): Promise<void> => {
     return await this.driver.sleep(ms);
+  }
+
+  searchElement = async (selector: string): Promise<IDriver> => {
+    return await this.driver.searchElement(selector);  
   }
 }
